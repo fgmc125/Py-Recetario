@@ -3,7 +3,8 @@ import sys
 from PyQt5.QtCore import QCoreApplication
 from PyQt5.QtWidgets import QApplication
 
-from src.controllers.controladores import MainController, NewRecipeController, AddIngredientsController
+from src.controllers.controladores import MainController, NewRecipeController, AddIngredientsController, \
+    RecipeController
 
 
 class Application:
@@ -29,8 +30,7 @@ class Application:
         elif ui == "ingredientes":
             self.__ui.append(AddIngredientsController(self, owner=parent))
         elif ui == "ver receta":
-            #self.__ui.append(MainController(self, owner=parent, recipe=data))
-            pass
+            self.__ui.append(RecipeController(self, owner=parent, recipe=data))
 
         if trash:
             trash.hide()

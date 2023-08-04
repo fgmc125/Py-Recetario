@@ -30,7 +30,9 @@ class MainController(QMainWindow):
         # self.btn_search.clicked.connect(self.__buscar)
         self.btn_new.clicked.connect(self.__nueva_receta)
         self.btn_edit.clicked.connect(self.__actualizar_receta)
-        self.btn_remove.clicked.connect(self.__nueva_receta)
+        #self.btn_remove.clicked.connect(self.__nueva_receta)
+        self.btn_open.clicked.connect(self.ver_receta)
+
 
     def closeEvent(self, event):
         reply = QMessageBox.question(
@@ -460,3 +462,105 @@ class AddIngredientsController(QDialog):
         if reply == QMessageBox.Yes:
             self.remove_ingredients.append(row_data)
             self.tableWidget.removeRow(row)
+
+class RecipeController(QDialog):
+    def __init__(self, application, owner, recipe, name="asdasda Dialog"):
+        super(RecipeController, self).__init__(parent=owner)
+        self.name = name
+        self._application = application
+        self.owner = owner
+        self.recipe = recipe
+
+        loadUi('src/views/RecipeView.ui', self)
+        self.__setupUi()
+        self.__setupUiComponents()
+
+    def __setupUi(self):
+        self.tfd_name.setText(self.recipe.nombre.upper())
+        self.tfd_time1.setText(str(self.recipe.tiempo_preparacion))
+        self.tfd_time2.setText(str(self.recipe.tiempo_coccion))
+        self.__qtable(['Ingrediente', 'Cantidad', 'Unidad'], self.recipe.ingredientes)
+        self.text_area.setText(self.recipe.instrucciones)
+
+
+    def __setupUiComponents(self):
+        self.btn_accept.clicked.connect(self.close)
+
+    def __qtable(self, header, data, layout=None, table=None):
+        _translate = QtCore.QCoreApplication.translate
+
+        if not table:
+            table = QtWidgets.QTableWidget()
+            self.tableWidget = table
+
+        if not layout:
+            layout = self.verticalLayout_task
+
+        table.setStyleSheet("""QTableView {
+        background-color: transparent;
+        font-size:13px;
+    }
+
+    QHeaderView::section:horizontal {
+        color: #fff;
+        border-style: solid;
+        background-color: #0098DA;
+     }
+
+    QTableWidget {
+        border: 2px solid #0098DA;
+        border-top-color: #0098DA;
+        gridline-color: #616161;
+        selection-background-color: #616161;
+        color:#333;
+        font-size:12px;
+     }""")
+        #table.setGeometry(QtCore.QRect(130, 150, 256, 192))
+        table.setObjectName("tableWidget")
+        layout.addWidget(table)
+
+        table.setEnabled(True)
+        table.setAcceptDrops(True)
+        table.setAutoFillBackground(True)
+        table.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        table.setFrameShadow(QtWidgets.QFrame.Sunken)
+        table.setLineWidth(1)
+        table.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustIgnored)
+        table.setDragEnabled(True)
+        table.setAlternatingRowColors(True)
+        table.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        table.setShowGrid(True)
+        table.setGridStyle(QtCore.Qt.SolidLine)
+        table.setCornerButtonEnabled(True)
+        table.setRowCount(0)
+        table.setColumnCount(len(header))
+        table.setObjectName("tableWidget")
+
+        for i in range(len(header)):
+            table.setHorizontalHeaderItem(i, QtWidgets.QTableWidgetItem())
+
+        table.horizontalHeader().setVisible(True)
+        table.horizontalHeader().setCascadingSectionResizes(False)
+        table.horizontalHeader().setHighlightSections(False)
+        table.horizontalHeader().setSortIndicatorShown(False)
+        table.horizontalHeader().setStretchLastSection(True)
+        table.verticalHeader().setVisible(True)
+        table.verticalHeader().setCascadingSectionResizes(False)
+        table.verticalHeader().setHighlightSections(True)
+        table.verticalHeader().setSortIndicatorShown(False)
+        table.verticalHeader().setStretchLastSection(False)
+
+        table.setSortingEnabled(False)
+
+        for i in range(len(header)):
+            table.horizontalHeaderItem(i).setText(_translate("MainWindow", header[i]))
+
+        aux = []
+        for item in data:
+            aux.append(item.to_list())
+        data = aux
+        table.setRowCount(len(data))
+        for i in range(len(data)):
+            for j in range(len(data[i])):
+                item = QTableWidgetItem(str(data[i][j]))
+                table.setItem(i, j, item)
