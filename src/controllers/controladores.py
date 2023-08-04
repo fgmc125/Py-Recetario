@@ -272,12 +272,12 @@ class NewRecipeController(QDialog):
             self.owner.recetas[self.receta['index']] = receta
             self.owner.actualizar_elemento_en_la_tabla(self.receta['row'], receta)
         else:
-            receta.id = self.owner.connector.nueva_receta(receta=receta)
             receta.ingredientes = [Ingrediente(
                 nombre=ingrediente['nombre'],
                 cantidad=ingrediente['cantidad'],
                 unidad=ingrediente['unidad']
-            ) for ingrediente in receta.ingredientes]
+            ) if not isinstance(ingrediente, Ingrediente) else ingrediente for ingrediente in receta.ingredientes]
+            receta.id = self.owner.connector.nueva_receta(receta=receta)
             self.owner.recetas.append(receta)
             self.owner.agregar_elemento_a_la_tabla(receta)
 
