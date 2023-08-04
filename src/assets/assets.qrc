@@ -1,0 +1,53 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>icons/heart.svg</file>
+    <file>icons/heart_empty.svg</file>
+    <file>icons/bars.svg</file>
+    <file>icons/door-closed.svg</file>
+    <file>icons/house.svg</file>
+    <file>icons/list-ul.svg</file>
+    <file>icons/table-cells-large.svg</file>
+    <file>icons/python logo.svg</file>
+    <file>icons/book-bookmark.svg</file>
+    <file>icons/circle-play.svg</file>
+    <file>icons/file-circle-minus.svg</file>
+    <file>icons/file-circle-plus.svg</file>
+    <file>icons/file-plus-minus.svg</file>
+    <file>icons/layer-minus.svg</file>
+    <file>icons/layer-plus.svg</file>
+    <file>icons/robot.svg</file>
+    <file>icons/arrows-turn-to-dots.svg</file>
+    <file>icons/video.svg</file>
+    <file>icons/circle-stop.svg</file>
+    <file>icons/arrow-up-right-from-square.svg</file>
+    <file>icons/broom-wide.svg</file>
+    <file>icons/circle-exclamation.svg</file>
+    <file>icons/circle-pause.svg</file>
+    <file>icons/circle-question.svg</file>
+    <file>icons/circle-right.svg</file>
+    <file>icons/circle-xmark.svg</file>
+    <file>icons/copy.svg</file>
+    <file>icons/ellipsis-vertical.svg</file>
+    <file>icons/floppy-disk.svg</file>
+    <file>icons/folder-open.svg</file>
+    <file>icons/folder-plus.svg</file>
+    <file>icons/magnifying-glass.svg</file>
+    <file>icons/message-exclamation.svg</file>
+    <file>icons/message-question.svg</file>
+    <file>icons/paste.svg</file>
+    <file>icons/pencil.svg</file>
+    <file>icons/play.svg</file>
+    <file>icons/play-pause.svg</file>
+    <file>icons/plus.svg</file>
+    <file>icons/repeat.svg</file>
+    <file>icons/scissors.svg</file>
+    <file>icons/square-code.svg</file>
+    <file>icons/stopwatch.svg</file>
+    <file>icons/tag.svg</file>
+    <file>icons/trash.svg</file>
+  </qresource>
+  <qresource prefix="images">
+    <file>images/cookbook-logo.png</file>
+    <file>images/cookbookui.png</file>
+  </qresource>
+</RCC>
